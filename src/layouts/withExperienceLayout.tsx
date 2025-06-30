@@ -16,17 +16,20 @@ export interface ExperienceLayoutComponents<T = any> {
 		experienceId: string
 		owner: Owner
 		additionalData?: T
+		children?: ReactNode
 	}) => ReactNode
 	AdminContent: (props: {
 		userId: string
 		experienceId: string
 		additionalData?: T
+		children?: ReactNode
 	}) => ReactNode
 	UserContent: (props: {
 		userId: string
 		experienceId: string
 		owner: Owner
 		additionalData?: T
+		children?: ReactNode
 	}) => ReactNode
 }
 
@@ -100,7 +103,9 @@ export function withExperienceLayout<T = any>(
 							experienceId={experienceId}
 							owner={owner}
 							additionalData={additionalData}
-						/>
+						>
+							{children}
+						</DeveloperContent>
 					)
 				}
 
@@ -110,7 +115,9 @@ export function withExperienceLayout<T = any>(
 							userId={userData.userId}
 							experienceId={experienceId}
 							additionalData={additionalData}
-						/>
+						>
+							{children}
+						</AdminContent>
 					)
 				}
 
@@ -120,7 +127,9 @@ export function withExperienceLayout<T = any>(
 						experienceId={experienceId}
 						owner={owner}
 						additionalData={additionalData}
-					/>
+					>
+						{children}
+					</UserContent>
 				)
 			}
 
@@ -141,4 +150,4 @@ export function withExperienceLayout<T = any>(
 			)
 		}
 	}
-} 
+}
