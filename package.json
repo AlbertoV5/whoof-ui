@@ -1,0 +1,56 @@
+{
+  "name": "@whoof/ui",
+  "version": "1.0.0",
+  "description": "UI components and higher-order functions for Whoof application layouts",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/betalytics-whop-app.git",
+    "directory": "packages/whoof-ui"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "whoof",
+    "react",
+    "layout",
+    "hoc",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^18.3.0",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "@whop/react": "^1.0.0",
+    "frosted-ui": "^1.0.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
