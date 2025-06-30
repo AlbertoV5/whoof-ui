@@ -1,6 +1,6 @@
 # @whoof/ui
 
-UI components and higher-order functions for Whoof application layouts. This package provides reusable components and layout patterns for building consistent Whoof applications with authentication, error handling, and role-based rendering.
+UI components and higher-order functions for Whop apps. This package provides reusable components and layout patterns for building consistent Whop applications with authentication, error handling, and role-based rendering.
 
 ## Features
 
