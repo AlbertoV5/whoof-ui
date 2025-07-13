@@ -43,7 +43,7 @@
   "private": false,
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/react": "^18.3.0",
+    "@types/react": "^19.0.0",
     "@types/node": "^20.0.0",
     "typescript": "^5"
   },
