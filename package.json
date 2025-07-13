@@ -1,6 +1,6 @@
 {
   "name": "@whoof/ui",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI components and higher-order functions for Whop application layouts",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -55,5 +55,9 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@whoof/auth": "git+git@github.com:AlbertoV5/whoof-auth.git",
+    "@whop/api": "^0.0.33"
   }
 }

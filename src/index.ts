@@ -1,8 +1,7 @@
 // Components
 export * from "./components"
 
-// Layouts
-export * from "./layouts"
+export * from "./builder"
 
 // Types
 export * from "./types"
