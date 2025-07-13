@@ -31,8 +31,6 @@ export async function AppBuilder<TData = Record<string, any>>({
 		developer: ViewType<TData>;
 	}
 	appConfig: {
-		themeConfig: Record<string, any>,
-		fonts: string,
 		appId: string,
 	}
 	getUser: (experienceId: string) => Promise<UserData | null>
@@ -41,10 +39,10 @@ export async function AppBuilder<TData = Record<string, any>>({
 		experience: WhopExperience
 	}) => Promise<TData> | null
 }) {
-	const { themeConfig, fonts, appId } = appConfig;
+	const { appId } = appConfig;
 	const { experienceId } = await params;
 	if (!experienceId) {
-		return <OutOfBounds themeConfig={themeConfig} appId={appId} fonts={fonts} />
+		return <OutOfBounds appId={appId} />
 	}
 	try {
 		return await withExperience({
@@ -53,7 +51,7 @@ export async function AppBuilder<TData = Record<string, any>>({
 			view: async (experience) => {
 				const user = await getUser(experience.id)
 				if (!user) {
-					return <Unauthorized themeConfig={themeConfig} appId={appId} fonts={fonts} />
+					return <Unauthorized />
 				}
 				let viewProps = {
 					experience,
@@ -77,11 +75,11 @@ export async function AppBuilder<TData = Record<string, any>>({
 					case "user":
 						return <appView.user {...viewProps} />
 					default:
-						return <Unauthorized themeConfig={themeConfig} appId={appId} fonts={fonts} />
+						return <Unauthorized />
 				}
 			},
 		})
 	} catch (error) {
-		return <NoExperience themeConfig={themeConfig} appId={appId} fonts={fonts} />
+		return <NoExperience />
 	}
 }

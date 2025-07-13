@@ -18,8 +18,6 @@ export declare function AppBuilder<TData = Record<string, any>>({ children, para
         developer: ViewType<TData>;
     };
     appConfig: {
-        themeConfig: Record<string, any>;
-        fonts: string;
         appId: string;
     };
     getUser: (experienceId: string) => Promise<UserData | null>;
