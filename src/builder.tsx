@@ -8,9 +8,12 @@ import { withExperience } from '@whoof/auth';
 import type { Sdk } from '@whop/api';
 import React from 'react';
 
-type ViewType = React.ComponentType<any>
+type ViewType<TData = Record<string, any>> = React.ComponentType<{
+	experience: WhopExperience
+	user: UserData
+} & TData>
 
-export async function AppBuilder({
+export async function AppBuilder<TData = Record<string, any>>({
 	children,
 	params,
 	whopSdk,
@@ -23,9 +26,9 @@ export async function AppBuilder({
 	params: Promise<{ experienceId: string }>
 	whopSdk: Sdk
 	appView: {
-		User: ViewType;
-		Creator: ViewType;
-		Developer: ViewType;
+		user: ViewType<TData>;
+		creator: ViewType<TData>;
+		developer: ViewType<TData>;
 	}
 	appConfig: {
 		themeConfig: Record<string, any>,
@@ -36,7 +39,7 @@ export async function AppBuilder({
 	fetchData?: (params: {
 		user: UserData
 		experience: WhopExperience
-	}) => Promise<Record<string, any>> | null
+	}) => Promise<TData> | null
 }) {
 	const { themeConfig, fonts, appId } = appConfig;
 	const { experienceId } = await params;
@@ -52,36 +55,27 @@ export async function AppBuilder({
 				if (!user) {
 					return <Unauthorized themeConfig={themeConfig} appId={appId} fonts={fonts} />
 				}
-				// Create owner object from experience
-				const owner = {
-					id: experience.company.id,
-					username: experience.company.title,
-					name: experience.company.title,
-				};
 				let viewProps = {
 					experience,
 					user,
-					experienceId: experience.id,
-					userId: user.userId,
-					owner
-				}
+				} as { experience: WhopExperience, user: UserData } & TData
 				if (fetchData) {
-					const initialData = await fetchData({ user, experience })
-					if (initialData) {
+					const data = await fetchData({ user, experience })
+					if (data) {
 						viewProps = {
 							...viewProps,
-							...initialData
+							...data
 						}
 					}
 				}
 				// Render view based on user status
 				switch (user.userStatus) {
 					case "developer":
-						return <appView.Developer {...viewProps} />
+						return <appView.developer {...viewProps} />
 					case "creator":
-						return <appView.Creator {...viewProps} />
+						return <appView.creator {...viewProps} />
 					case "user":
-						return <appView.User {...viewProps} />
+						return <appView.user {...viewProps} />
 					default:
 						return <Unauthorized themeConfig={themeConfig} appId={appId} fonts={fonts} />
 				}

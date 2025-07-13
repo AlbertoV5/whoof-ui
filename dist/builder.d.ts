@@ -2,17 +2,20 @@ import type { UserData, WhopExperience } from '@whoof/auth';
 import type { ReactNode } from 'react';
 import type { Sdk } from '@whop/api';
 import React from 'react';
-type ViewType = React.ComponentType<any>;
-export declare function AppBuilder({ children, params, whopSdk, appConfig, appView, getUser, fetchData, }: {
+type ViewType<TData = Record<string, any>> = React.ComponentType<{
+    experience: WhopExperience;
+    user: UserData;
+} & TData>;
+export declare function AppBuilder<TData = Record<string, any>>({ children, params, whopSdk, appConfig, appView, getUser, fetchData, }: {
     children: ReactNode;
     params: Promise<{
         experienceId: string;
     }>;
     whopSdk: Sdk;
     appView: {
-        User: ViewType;
-        Creator: ViewType;
-        Developer: ViewType;
+        user: ViewType<TData>;
+        creator: ViewType<TData>;
+        developer: ViewType<TData>;
     };
     appConfig: {
         themeConfig: Record<string, any>;
@@ -23,6 +26,6 @@ export declare function AppBuilder({ children, params, whopSdk, appConfig, appVi
     fetchData?: (params: {
         user: UserData;
         experience: WhopExperience;
-    }) => Promise<Record<string, any>> | null;
+    }) => Promise<TData> | null;
 }): Promise<import("react/jsx-runtime").JSX.Element>;
 export {};

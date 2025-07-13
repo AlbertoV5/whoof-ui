@@ -19517,38 +19517,30 @@ async function AppBuilder({
             fonts
           }, undefined, false, undefined, this);
         }
-        const owner = {
-          id: experience.company.id,
-          username: experience.company.title,
-          name: experience.company.title
-        };
         let viewProps = {
           experience,
-          user,
-          experienceId: experience.id,
-          userId: user.userId,
-          owner
+          user
         };
         if (fetchData) {
-          const initialData = await fetchData({ user, experience });
-          if (initialData) {
+          const data = await fetchData({ user, experience });
+          if (data) {
             viewProps = {
               ...viewProps,
-              ...initialData
+              ...data
             };
           }
         }
         switch (user.userStatus) {
           case "developer":
-            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.Developer, {
+            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.developer, {
               ...viewProps
             }, undefined, false, undefined, this);
           case "creator":
-            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.Creator, {
+            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.creator, {
               ...viewProps
             }, undefined, false, undefined, this);
           case "user":
-            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.User, {
+            return /* @__PURE__ */ jsx_dev_runtime4.jsxDEV(appView.user, {
               ...viewProps
             }, undefined, false, undefined, this);
           default:
